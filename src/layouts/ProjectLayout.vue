@@ -31,7 +31,7 @@
 
             <q-item clickable v-ripple to="/company/sales">
               <q-item-section avatar>
-                <q-icon name="star" />
+                <q-icon name="monetization_on" />
               </q-item-section>
 
               <q-item-section>Sales</q-item-section>
@@ -39,7 +39,7 @@
 
             <q-item clickable v-ripple>
               <q-item-section avatar>
-                <q-icon name="send" />
+                <q-icon name="store" />
               </q-item-section>
 
               <q-item-section>Inventory</q-item-section>
@@ -49,7 +49,7 @@
 
             <q-item clickable v-ripple>
               <q-item-section avatar>
-                <q-icon name="drafts" />
+                <q-icon name="pie_chart" />
               </q-item-section>
 
               <q-item-section>Report</q-item-section>
