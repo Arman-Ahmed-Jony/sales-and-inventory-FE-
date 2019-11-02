@@ -1,8 +1,8 @@
 {
   "name": "sales-and-inventory",
   "version": "0.0.1",
-  "description": "A Quasar Framework app",
-  "productName": "Quasar App",
+  "description": "A app for helping others",
+  "productName": "S&I",
   "cordovaId": "org.cordova.quasar.app",
   "capacitorId": "",
   "author": "arman",
