@@ -8,7 +8,7 @@
 
       <!-- <q-separator /> -->
       <q-card-section class="q-mt-md">
-        <q-input filled bottom-slots v-model="userName" label="User Name">
+        <q-input filled bottom-slots v-model="userName" label="User Email">
           <template v-slot:prepend>
             <q-icon name="supervised_user_circle" />
           </template>
@@ -55,6 +55,7 @@ export default {
   methods: {
     login() {
       console.log('login clicked');
+      this.$router.push({ path: '/company/dashboard' });
     },
 
   },

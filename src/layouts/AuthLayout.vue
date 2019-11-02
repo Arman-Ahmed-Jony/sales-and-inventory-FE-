@@ -2,20 +2,12 @@
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
       <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          @click="leftDrawerOpen = !leftDrawerOpen"
-          icon="menu"
-          aria-label="Menu"
-        />
 
         <q-toolbar-title>
-          Quasar App
+          Sales And Inventory App
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <div>App v.0.1</div>
       </q-toolbar>
     </q-header>
 
