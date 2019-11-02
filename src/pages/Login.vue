@@ -55,7 +55,7 @@ export default {
   methods: {
     login() {
       console.log('login clicked');
-      this.$router.push({ path: '/company/dashboard' });
+      if (this.userName === 'admin' && this.password === 'pass') { this.$router.push({ path: '/company/dashboard' }); }
     },
 
   },
