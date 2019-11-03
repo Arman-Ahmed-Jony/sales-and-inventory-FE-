@@ -13,6 +13,9 @@ const routes = [
     children: [
       { path: 'dashboard', component: () => import('pages/Dashboard.vue') },
       { path: 'sales', component: () => import('pages/Sales.vue') },
+      { path: 'inventory', component: () => import('pages/Inventory.vue') },
+      { path: 'report', component: () => import('pages/Report.vue') },
+      { path: 'administration', component: () => import('pages/Administration.vue') },
     ],
 
   },

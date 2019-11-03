@@ -33,6 +33,8 @@ module.exports = {
   // add your custom rules here
   rules: {
     "vue/max-attributes-per-line": "off",
+    "linebreak-style": 0,
+    "global-require": 0,
     'no-param-reassign': 'off',
     'import/first': 'off',
     'import/named': 'error',

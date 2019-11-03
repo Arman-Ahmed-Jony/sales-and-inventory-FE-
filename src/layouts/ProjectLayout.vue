@@ -4,6 +4,7 @@
         <q-toolbar>
           <q-btn flat @click="drawer = !drawer" round dense icon="menu" />
           <q-toolbar-title>Sales And Inventory App</q-toolbar-title>
+          <q-btn flat label="Logout" @click="logout()"/>
         </q-toolbar>
       </q-header>
 
@@ -37,7 +38,7 @@
               <q-item-section>Sales</q-item-section>
             </q-item>
 
-            <q-item clickable v-ripple>
+            <q-item clickable v-ripple to="/company/inventory">
               <q-item-section avatar>
                 <q-icon name="store" />
               </q-item-section>
@@ -47,13 +48,22 @@
 
             <q-separator />
 
-            <q-item clickable v-ripple>
+            <q-item clickable v-ripple to="/company/report">
               <q-item-section avatar>
                 <q-icon name="pie_chart" />
               </q-item-section>
 
               <q-item-section>Report</q-item-section>
             </q-item>
+
+            <q-item clickable v-ripple to="/company/administration">
+              <q-item-section avatar>
+                <q-icon name="security" />
+              </q-item-section>
+
+              <q-item-section>adminstration</q-item-section>
+            </q-item>
+
           </q-list>
         </q-scroll-area>
       </q-drawer>
@@ -72,6 +82,12 @@ export default {
       drawer: false,
       miniState: true,
     };
+  },
+  methods: {
+    logout() {
+      console.log('logoout clicked');
+      this.$router.push('/');
+    },
   },
 };
 </script>
