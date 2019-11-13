@@ -44,7 +44,12 @@ module.exports = function (ctx) {
       all: false,
 
       components: [
+        'QDialog',
         'QCard',
+        'QTable',
+        'QTh',
+        'QTr',
+        'QTd',
         'QCardSection',
         'QCardActions',
         'QLayout',
@@ -62,12 +67,14 @@ module.exports = function (ctx) {
         'QItemLabel',
         'QInput',
         'QIcon',
+        'QAvatar',
         'QSeparator',
         'QScrollArea',
       ],
 
       directives: [
         'Ripple',
+        'ClosePopup',
       ],
 
       // Quasar plugins
