@@ -22,7 +22,7 @@
       >
         <q-scroll-area class="fit">
           <q-list padding>
-            <q-item clickable v-ripple to="/company/dashboard">
+            <q-item clickable v-ripple to="/dashboard">
               <q-item-section avatar>
                 <q-icon name="home" />
               </q-item-section>
@@ -30,7 +30,7 @@
               <q-item-section>Dashboard</q-item-section>
             </q-item>
 
-            <q-item clickable v-ripple to="/company/sales">
+            <q-item clickable v-ripple to="/sales">
               <q-item-section avatar>
                 <q-icon name="monetization_on" />
               </q-item-section>
@@ -38,7 +38,7 @@
               <q-item-section>Sales</q-item-section>
             </q-item>
 
-            <q-item clickable v-ripple to="/company/inventory">
+            <q-item clickable v-ripple to="/inventory">
               <q-item-section avatar>
                 <q-icon name="store" />
               </q-item-section>
@@ -48,7 +48,7 @@
 
             <q-separator />
 
-            <q-item clickable v-ripple to="/company/report">
+            <q-item clickable v-ripple to="/report">
               <q-item-section avatar>
                 <q-icon name="pie_chart" />
               </q-item-section>
@@ -56,7 +56,7 @@
               <q-item-section>Report</q-item-section>
             </q-item>
 
-            <q-item clickable v-ripple to="/company/administration">
+            <q-item clickable v-ripple to="/administration">
               <q-item-section avatar>
                 <q-icon name="security" />
               </q-item-section>
