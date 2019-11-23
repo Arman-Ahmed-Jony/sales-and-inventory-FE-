@@ -12,7 +12,7 @@ export default [
       {
         path: 'dashboard',
         component: () => import('./pages/Dashboard'),
-        name: 'auth',
+        name: 'dashboard',
         meta: {
           noAuthRequired: true,
         },

@@ -12,3 +12,9 @@ export function userProfile({ commit }, userId) {
       commit('PROFILE', { firstName, lastName });
     });
 }
+export function testAPI() {
+  return usersClient.test().then((response) => {
+    console.log(response);
+    return response;
+  });
+}

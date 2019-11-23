@@ -2,7 +2,7 @@ import client from '../../Clients';
 // const RESOURCE = 'users'
 export default {
   test() {
-    return client.get('/productcat');
+    return client.get('/v1/productcat');
   },
   all() {
     return client.get('/users');

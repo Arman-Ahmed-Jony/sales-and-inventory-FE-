@@ -45,6 +45,7 @@
 
 <script>
 export default {
+  name: 'Login',
   data() {
     return {
       userName: '',
@@ -52,9 +53,16 @@ export default {
       isPwd: true,
     };
   },
+  created() {
+    this.$store.dispatch('common/setPageTitle', 'Login');
+  },
   methods: {
     login() {
       console.log('login clicked');
+      // this.$store.dispatch('testAPI');
+      this.$store.dispatch('testAPI').then((res) => {
+        console.log(res);
+      });
       if (this.userName === 'admin' && this.password === 'pass') { this.$router.push({ path: '/dashboard' }); }
     },
 
