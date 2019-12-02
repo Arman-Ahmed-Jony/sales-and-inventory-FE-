@@ -3,6 +3,12 @@ import client from '../../Clients';
 const RESOURCE_NAME = 'bounties';
 
 export default {
+  listProductCategory() {
+    return client.get('/v1/productcat');
+  },
+  deleteProductCategory(id) {
+    return client.delete(`/v1/productcat/${id}`);
+  },
   create(payload) {
     return client.post(`${RESOURCE_NAME}`, payload);
   },
