@@ -1,11 +1,6 @@
 <template>
   <q-page class>
-    <!-- <h3>Inventory page is under construction</h3> -->
     <div class="q-pa-md">
-
-      <!-- <div class="q-mt-md">
-      Selected: {{ JSON.stringify(selected) }}
-      </div>-->
       {{productCategoryList}}
 
       <q-btn
@@ -23,7 +18,6 @@
         class="q-mt-lg"
         @click="confirm = true"
       />
-      <q-btn @click="test">test</q-btn>
     </div>
 
     <q-dialog
@@ -122,39 +116,61 @@
           <div class="text-h6">Product Category List</div>
         </q-card-section>
         <q-card-section>
+          <q-item class="row">
+            <q-item-section class="col-1">Category Id</q-item-section>
+            <q-item-section>Category Name</q-item-section>
+            <q-item-section class="col-1">Actions</q-item-section>
+          </q-item>
           <q-list
             bordered
             separator
             v-for="(category,index) in productCategoryList"
             :key="index"
           >
-            <q-item>
-              <q-item-section>{{index}}</q-item-section>
-              <q-item-section>{{category.categoryName}}</q-item-section>
-              <q-item-section>
+
+            <q-item class="row">
+              <q-item-section class="col-1">{{category.id}}</q-item-section>
+              <q-item-section class="col">{{category.categoryName}}</q-item-section>
+              <q-item-section class="col-1">
                 <q-btn
-                  label="delete"
+                  icon="delete"
+                  color="red"
+                  round
                   @click="deleteCategoty(category.id)"
                 />
               </q-item-section>
             </q-item>
           </q-list>
         </q-card-section>
+        <q-card-section class="row q-pa-md">
+          <q-input
+            label="category name"
+            class="col"
+            dense
+            v-model="categoryName"
+          />
+          <q-btn
+            class="col1"
+            round
+            color="primary"
+            icon="add"
+            @click="addProductCategory()"
+          />
+        </q-card-section>
+        <q-card-section>
 
-        <q-card-actions align="right">
           <q-btn
             flat
-            label="Decline"
+            label="Add Category"
             color="primary"
-            v-close-popup
           />
           <q-btn
             flat
-            label="Accept"
+            label="close"
             color="primary"
             v-close-popup
           />
-        </q-card-actions>
+        </q-card-section>
       </q-card>
     </q-dialog>
   </q-page>
@@ -169,7 +185,8 @@ export default {
       text: '',
       confirm: false,
       addProduct: false,
-      categoryDialog: true,
+      categoryDialog: false,
+      categoryName: '',
     };
   },
   created() {
@@ -197,9 +214,15 @@ export default {
         this.$store.dispatch('loadProductCategoryList');
       });
     },
-    test() {
-      this.$store.dispatch('loadProductCategoryList').then((res) => {
-        console.log(res);
+    addProductCategory() {
+      console.log(this.categoryName);
+      const payload = {
+        categoryName: this.categoryName,
+      };
+      this.$store.dispatch('addProductCategory', payload).then((response) => {
+        console.log(response);
+        this.$store.dispatch('loadProductCategoryList');
+        this.categoryName = '';
       });
     },
   },

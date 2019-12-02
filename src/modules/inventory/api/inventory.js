@@ -9,6 +9,9 @@ export default {
   deleteProductCategory(id) {
     return client.delete(`/v1/productcat/${id}`);
   },
+  addProductCategory(payload) {
+    return client.post('/v1/productcat', payload);
+  },
   create(payload) {
     return client.post(`${RESOURCE_NAME}`, payload);
   },

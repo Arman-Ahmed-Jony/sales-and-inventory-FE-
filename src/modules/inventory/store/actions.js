@@ -39,6 +39,20 @@ export const deleteProductCategory = ({ commit }, id) => {
   commit('SET_LOADING', true);
   return inventoryClient.deleteProductCategory(id);
 };
+
+export const addProductCategory = ({ commit }, payload) => {
+  commit('SET_LOADING', true);
+  return inventoryClient.addProductCategory(payload)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      const errorMessage = error.response;
+      commit('SET_ERROR', errorMessage);
+      // console.log(error)
+    });
+};
 // export const loadProductCategoryList = ({ commit }) => inventoryClient.listProductCategory().then((response) => {
 //     commit('SET_PRODUCT_CATEGORY');
 //   });
