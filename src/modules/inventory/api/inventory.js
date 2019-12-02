@@ -12,6 +12,15 @@ export default {
   addProductCategory(payload) {
     return client.post('/v1/productcat', payload);
   },
+  productList() {
+    return client.get('/v1/products');
+  },
+  createProduct(payload) {
+    return client.post('/v1/products', payload);
+  },
+  deleteProduct(id) {
+    return client.delete(`/v1/products/${id}`);
+  },
   create(payload) {
     return client.post(`${RESOURCE_NAME}`, payload);
   },

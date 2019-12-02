@@ -1,7 +1,94 @@
 <template>
   <q-page class>
     <div class="q-pa-md">
-      {{productCategoryList}}
+      {{productCategoty}}
+      <!-- {{productCategoryList}} -->
+      <q-item-label header>Product List</q-item-label>
+
+      <q-separator inset />
+      <q-list
+        bordered
+        class="rounded-borders full-width"
+        v-for="(product,index) in productList"
+        :key="index"
+      >
+        <!-- <q-item-label header>Product List</q-item-label>
+
+        <q-separator inset /> -->
+
+        <q-item>
+          <q-item-section
+            top
+            class="col-1 gt-sm"
+          >
+            <q-item-label class="q-mt-sm">{{index}}</q-item-label>
+          </q-item-section>
+          <q-item-section
+            top
+            class="col-2 gt-sm"
+          >
+            <q-item-label class="q-mt-sm">{{product.prodId}}</q-item-label>
+          </q-item-section>
+
+          <q-item-section top>
+            <q-item-label lines="1">
+              <span class="text-weight-medium">[{{product.prodName}}]</span>
+              <span class="text-grey-8"> - {{product.prodCategory}}</span>
+            </q-item-label>
+            <q-item-label
+              caption
+              lines="1"
+            >
+              {{product.prodDesc}}
+            </q-item-label>
+            <q-item-label
+              lines="1"
+              class="q-mt-xs text-body2 text-weight-bold text-primary text-uppercase"
+            >
+              <span>price: {{product.prodPrice}}</span><br />
+              <span>Available: {{product.prodQuantity}}</span>
+
+            </q-item-label>
+          </q-item-section>
+
+          <q-item-section
+            top
+            side
+          >
+            <div class="text-grey-8 q-gutter-xs">
+              <q-btn
+                class="gt-xs"
+                size="12px"
+                color="red"
+                flat
+                dense
+                round
+                @click="deleteProduct(product.prodId)"
+                icon="delete"
+              />
+              <q-btn
+                class="gt-xs"
+                size="12px"
+                color="green"
+                flat
+                dense
+                round
+                icon="done"
+              />
+              <q-btn
+                size="12px"
+                flat
+                dense
+                round
+                icon="more_vert"
+              />
+            </div>
+          </q-item-section>
+        </q-item>
+
+        <q-separator />
+
+      </q-list>
 
       <q-btn
         label="show category list"
@@ -11,7 +98,7 @@
       <q-btn
         label="add a product"
         class="q-mr-md q-mt-lg"
-        @click="addProduct=true"
+        @click="addProductDialog=true"
       />
       <q-btn
         label="delete selected products"
@@ -21,38 +108,48 @@
     </div>
 
     <q-dialog
-      v-model="addProduct"
-      persistent
+      v-model="addProductDialog"
+      transition-show="slide-down"
+      transition-hide="slide-up"
     >
       <q-card style="width:800px">
         <q-card-section class="row items-center">
-          <q-avatar
-            icon="add_circle"
-            color="green"
-            text-color="white"
-          />
           <span class="q-ml-sm">Add Product</span>
         </q-card-section>
         <q-card-section>
           <q-input
-            v-model="text"
+            v-model="productId"
+            label="SKU"
+            type="number"
+          />
+          <q-input
+            v-model="productName"
             label="Name"
           />
           <q-input
-            v-model="text"
+            v-model="productDescription"
             label="Description"
           />
-          <q-input
-            v-model="text"
+
+          <q-select
+            v-model="productCategoty"
+            :options="productCategoryList"
+            option-value="id"
+            option-label="categoryName"
+            map-options
+            emit-value
             label="Category"
           />
+
           <q-input
-            v-model="text"
+            v-model="productPrice"
             label="Price"
+            type="number"
           />
           <q-input
-            v-model="text"
+            v-model="productQuantity"
             label="Quantity"
+            type="number"
           />
         </q-card-section>
 
@@ -67,7 +164,7 @@
             flat
             label="Add"
             color="primary"
-            v-close-popup
+            @click="addProduct()"
           />
         </q-card-actions>
       </q-card>
@@ -130,8 +227,10 @@
 
             <q-item class="row">
               <q-item-section class="col-1">{{category.id}}</q-item-section>
-              <q-item-section class="col">{{category.categoryName}}</q-item-section>
-              <q-item-section class="col-1">
+              <q-separator vertical />
+              <q-item-section class="col q-pl-md">{{category.categoryName}}</q-item-section>
+              <q-separator vertical />
+              <q-item-section class="col-1 q-pl-md">
                 <q-btn
                   icon="delete"
                   color="red"
@@ -157,20 +256,6 @@
             @click="addProductCategory()"
           />
         </q-card-section>
-        <q-card-section>
-
-          <q-btn
-            flat
-            label="Add Category"
-            color="primary"
-          />
-          <q-btn
-            flat
-            label="close"
-            color="primary"
-            v-close-popup
-          />
-        </q-card-section>
       </q-card>
     </q-dialog>
   </q-page>
@@ -182,19 +267,26 @@ export default {
   data() {
     return {
       selected: [],
-      text: '',
+      productCategoty: '',
+      productName: '',
+      productId: '',
+      productDescription: '',
+      productPrice: '',
+      productQuantity: '',
       confirm: false,
-      addProduct: false,
+      addProductDialog: false,
       categoryDialog: false,
       categoryName: '',
     };
   },
   created() {
     this.$store.dispatch('loadProductCategoryList');
+    this.$store.dispatch('loadProductList');
   },
   computed: {
     ...mapState({
       productCategoryList: state => state.inventory.productCategoryList,
+      productList: state => state.inventory.productList,
     }),
   },
   methods: {
@@ -212,6 +304,7 @@ export default {
       console.log('id is ', id);
       this.$store.dispatch('deleteProductCategory', id).then(() => {
         this.$store.dispatch('loadProductCategoryList');
+        this.$store.dispatch('loadProductList');
       });
     },
     addProductCategory() {
@@ -223,6 +316,28 @@ export default {
         console.log(response);
         this.$store.dispatch('loadProductCategoryList');
         this.categoryName = '';
+      });
+    },
+    addProduct() {
+      const payload = {
+        prodCategory: this.productCategoty,
+        prodId: parseInt(this.productId, 10),
+        prodName: this.productName,
+        prodDesc: this.productDescription,
+        prodPrice: parseInt(this.productPrice, 10),
+        prodQuantity: parseInt(this.productQuantity, 10),
+      };
+      console.log(payload);
+      this.$store.dispatch('createProduct', payload).then((response) => {
+        console.log('add product', response);
+        this.$store.dispatch('loadProductCategoryList');
+        this.$store.dispatch('loadProductList');
+      });
+    },
+    deleteProduct(id) {
+      this.$store.dispatch('deleteProduct', id).then(() => {
+        this.$store.dispatch('loadProductCategoryList');
+        this.$store.dispatch('loadProductList');
       });
     },
   },

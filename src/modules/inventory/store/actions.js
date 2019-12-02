@@ -39,6 +39,10 @@ export const deleteProductCategory = ({ commit }, id) => {
   commit('SET_LOADING', true);
   return inventoryClient.deleteProductCategory(id);
 };
+export const deleteProduct = ({ commit }, id) => {
+  commit('SET_LOADING', true);
+  return inventoryClient.deleteProduct(id);
+};
 
 export const addProductCategory = ({ commit }, payload) => {
   commit('SET_LOADING', true);
@@ -53,6 +57,32 @@ export const addProductCategory = ({ commit }, payload) => {
       // console.log(error)
     });
 };
-// export const loadProductCategoryList = ({ commit }) => inventoryClient.listProductCategory().then((response) => {
-//     commit('SET_PRODUCT_CATEGORY');
-//   });
+
+export const loadProductList = ({ commit }) => {
+  commit('SET_LOADING', true);
+  return inventoryClient.productList()
+    .then((response) => {
+      commit('SET_PRODUCT', response.data.data);
+
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      const errorMessage = error.response;
+      commit('SET_ERROR', errorMessage);
+      // console.log(error)
+    });
+};
+export const createProduct = ({ commit }, payload) => {
+  commit('SET_LOADING', true);
+  return inventoryClient.createProduct(payload)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      const errorMessage = error.response;
+      commit('SET_ERROR', errorMessage);
+      // console.log(error)
+    });
+};
