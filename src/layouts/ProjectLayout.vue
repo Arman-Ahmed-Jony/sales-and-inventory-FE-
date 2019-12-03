@@ -97,6 +97,18 @@
             <q-item-section>Adminstration</q-item-section>
           </q-item>
 
+          <q-item
+            clickable
+            v-ripple
+            to="/users"
+          >
+            <q-item-section avatar>
+              <q-icon name="verified_user" />
+            </q-item-section>
+
+            <q-item-section>Users</q-item-section>
+          </q-item>
+
         </q-list>
       </q-scroll-area>
     </q-drawer>

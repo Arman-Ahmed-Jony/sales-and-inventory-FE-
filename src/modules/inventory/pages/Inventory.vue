@@ -17,12 +17,6 @@
         <q-item>
           <q-item-section
             top
-            class="col-1 gt-sm"
-          >
-            <q-item-label class="q-mt-sm">{{index}}</q-item-label>
-          </q-item-section>
-          <q-item-section
-            top
             class="col-2 gt-sm"
           >
             <q-item-label class="q-mt-sm">{{product.prodId}}</q-item-label>
@@ -71,7 +65,7 @@
                 flat
                 dense
                 round
-                icon="done"
+                icon="edit"
               />
               <q-btn
                 size="12px"

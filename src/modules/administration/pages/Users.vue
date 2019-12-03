@@ -1,12 +1,12 @@
 <template>
   <q-page class="q-pa-md">
-    <q-item-label header>Employee List</q-item-label>
+    <q-item-label header>User List</q-item-label>
 
     <q-separator inset />
     <q-list
       bordered
       class="rounded-borders full-width"
-      v-for="(emplyee,index) in employeeList"
+      v-for="(user,index) in userList"
       :key="index"
     >
       <q-item>
@@ -14,20 +14,19 @@
           top
           class="col-2 gt-sm"
         >
-          <q-item-label class="q-mt-sm">{{emplyee.id}}</q-item-label>
+          <q-item-label class="q-mt-sm">{{user.empId}}</q-item-label>
         </q-item-section>
 
         <q-item-section top>
           <q-item-label lines="1">
-            <span class="text-weight-medium">{{`${emplyee.fname} ${emplyee.lname}`}}</span>
+            <span class="text-weight-medium">{{user.userName}}</span>
 
           </q-item-label>
           <q-item-label
             lines="1"
             class="q-mt-xs text-body2 text-weight-bold text-primary text-uppercase"
           >
-            <span class="text-grey-8"> {{emplyee.residentialAddress}}</span><br />
-            <span class="text-grey-8"> {{emplyee.permanentAddress}}</span>
+            <span class="text-grey-8"> {{user.type}}</span>
           </q-item-label>
 
         </q-item-section>
@@ -43,7 +42,7 @@
               flat
               dense
               round
-              @click="deleteEmployee(emplyee.id)"
+              @click="deleteUser(user.id)"
               icon="delete"
             />
             <q-btn
@@ -65,42 +64,44 @@
     </q-list>
 
     <q-btn
-      label="Add Employee"
+      label="Register User"
       class="q-mt-lg"
-      @click="employeeDialog = true"
+      @click="RegistrationDialog = true"
     />
 
     <q-dialog
-      v-model="employeeDialog"
+      v-model="RegistrationDialog"
       transition-show="slide-down"
       transition-hide="slide-up"
     >
       <q-card style="width:800px">
         <q-card-section class="row items-center">
-          <span class="q-ml-sm">Add Employee</span>
+          <span class="q-ml-sm">Register a User</span>
         </q-card-section>
         <q-card-section>
-          <!-- <q-input
-            v-model="productId"
-            label="SKU"
-            type="number"
-          /> -->
-          <q-input
-            v-model="fname"
-            label="First Name"
+          <q-select
+            v-model="employee"
+            :options="employeeList"
+            option-value="id"
+            option-label="fname"
+            map-options
+            emit-value
+            label="Employee"
           />
           <q-input
-            v-model="lname"
-            label="Last Name"
+            v-model="userName"
+            label="User Name"
           />
 
           <q-input
-            v-model="resinditialAddress"
-            label="Resinditial Address"
+            v-model="password"
+            label="Password"
+            type="Password"
           />
-          <q-input
-            v-model="permanentAddress"
-            label="Permanent Address"
+          <q-select
+            v-model="userType"
+            :options="userTypeList"
+            label="type"
           />
         </q-card-section>
 
@@ -113,9 +114,9 @@
           />
           <q-btn
             flat
-            label="Add"
+            label="Register"
             color="primary"
-            @click="addEmployee()"
+            @click="createUser()"
           />
         </q-card-actions>
       </q-card>
@@ -129,39 +130,44 @@ import { mapState } from 'vuex';
 export default {
   data() {
     return {
-      employeeDialog: false,
-      fname: '',
-      lname: '',
-      resinditialAddress: '',
-      permanentAddress: '',
+      RegistrationDialog: false,
+      userName: '',
+      employee: '',
+      userType: '',
+      password: '',
+      userTypeList: ['USER', 'ADMIN'],
     };
   },
   created() {
-    this.$store.dispatch('loadEmployeeList').then((res) => {
+    this.$store.dispatch('loadUserList').then((res) => {
+      this.$store.dispatch('loadEmployeeList');
+      this.$q.dark.toggle();
+
       console.log(res);
     });
   },
   computed: {
-
     ...mapState({
+      userList: state => state.administration.userList,
       employeeList: state => state.administration.employeeList,
     }),
   },
   methods: {
-    addEmployee() {
-      const employee = {
-        fname: this.fname,
-        lname: this.lname,
-        permanentAddress: this.permanentAddress,
-        residentialAddress: this.resinditialAddress,
-      };
-      this.$store.dispatch('createEmployee', employee).then(() => {
-        this.$store.dispatch('loadEmployeeList');
+    deleteUser(id) {
+      this.$store.dispatch('deleteUser', id).then(() => {
+        this.$store.dispatch('loadUserList');
       });
     },
-    deleteEmployee(id) {
-      this.$store.dispatch('deleteEmployee', id).then(() => {
-        this.$store.dispatch('loadEmployeeList');
+    createUser() {
+      const user = {
+        empId: this.employee,
+        userName: this.userName,
+        pass: this.password,
+        type: this.userType,
+      };
+      this.$store.dispatch('createUser', user).then(() => {
+        this.$store.dispatch('loadUserList');
+        this.RegistrationDialog = false;
       });
     },
   },

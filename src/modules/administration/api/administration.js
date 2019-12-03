@@ -9,6 +9,18 @@ export default {
   deleteEmployee(id) {
     return client.delete(`/v1/employee/${id}`);
   },
+  createEmployee(employee) {
+    return client.post('/v1/employee', employee);
+  },
+  userList() {
+    return client.get('/v1/user');
+  },
+  createUser(user) {
+    return client.post('/v1/user/register', user);
+  },
+  deleteUser(id) {
+    return client.delete(`/v1/user/${id}`);
+  },
   create(payload) {
     return client.post(`${RESOURCE_NAME}`, payload);
   },

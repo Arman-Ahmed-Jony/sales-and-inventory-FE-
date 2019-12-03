@@ -17,6 +17,14 @@ export default [
           noAuthRequired: true,
         },
       },
+      {
+        path: 'users',
+        component: () => import('./pages/Users'),
+        name: 'users',
+        meta: {
+          noAuthRequired: true,
+        },
+      },
     ],
   },
 ];
