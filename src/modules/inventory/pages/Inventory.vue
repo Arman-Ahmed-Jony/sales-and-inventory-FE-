@@ -1,8 +1,6 @@
 <template>
   <q-page class>
     <div class="q-pa-md">
-      {{productCategoty}}
-      <!-- {{productCategoryList}} -->
       <q-item-label header>Product List</q-item-label>
 
       <q-separator inset />
@@ -33,7 +31,7 @@
           <q-item-section top>
             <q-item-label lines="1">
               <span class="text-weight-medium">[{{product.prodName}}]</span>
-              <span class="text-grey-8"> - {{product.prodCategory}}</span>
+              <span class="text-grey-8"> - {{productCategory(product.prodCategory)}}</span>
             </q-item-label>
             <q-item-label
               caption
@@ -333,6 +331,9 @@ export default {
         this.$store.dispatch('loadProductCategoryList');
         this.$store.dispatch('loadProductList');
       });
+    },
+    productCategory(id) {
+      return this.productCategoryList.find(prodCategory => prodCategory.id === id).categoryName;
     },
     deleteProduct(id) {
       this.$store.dispatch('deleteProduct', id).then(() => {
