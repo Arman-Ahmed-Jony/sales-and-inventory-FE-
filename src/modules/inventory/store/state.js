@@ -1,11 +1,6 @@
 export default {
-  loadedAccount: null,
-  accountDetails: {},
-  loadedProjects: [],
-  loadedBounty: [],
-  loadedTeamMembers: [],
+  productCategoryList: [],
+  productList: [],
   loading: true,
-  loadedCategories: [],
-  loadingProject: true,
   error: '',
 };

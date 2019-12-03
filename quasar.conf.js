@@ -51,6 +51,7 @@ module.exports = function (ctx) {
         'QTr',
         'QTd',
         'QCardSection',
+        'QSelect',
         'QCardActions',
         'QLayout',
         'QHeader',
