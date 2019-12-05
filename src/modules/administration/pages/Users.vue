@@ -141,7 +141,6 @@ export default {
   created() {
     this.$store.dispatch('loadUserList').then((res) => {
       this.$store.dispatch('loadEmployeeList');
-      this.$q.dark.toggle();
 
       console.log(res);
     });

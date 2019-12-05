@@ -1,24 +1,10 @@
-import client from '../../Clients'
-const RESOURCE_NAME = 'bounties'
+import client from '../../Clients';
+
+// const RESOURCE_NAME = 'bounties';
 
 export default {
-  create (payload) {
-    return client.post(`${RESOURCE_NAME}`, payload)
-  },
 
-  list () {
-    return client.get(`${RESOURCE_NAME}`)
+  createSale(payload) {
+    return client.post('/v1/sales', payload);
   },
-
-  update (payload) {
-    return client.post(`${RESOURCE_NAME}/${payload.id}`, payload)
-  },
-
-  del (id) {
-    return client.delete(`${RESOURCE_NAME}/${id}`)
-  },
-
-  details (id) {
-    return client.get(`${RESOURCE_NAME}/${id}`)
-  }
-}
+};
