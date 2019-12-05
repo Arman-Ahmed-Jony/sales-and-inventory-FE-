@@ -44,6 +44,14 @@
           <q-item-section
             top
             side
+            class="q-pt-md"
+          >
+            {{salesProduct.prodPrice * salesProduct.prodQuantity}} tk
+          </q-item-section>
+          <q-item-section
+            top
+            side
+            class="q-pt-md"
           >
             <div class="text-grey-8 q-gutter-xs">
               <q-btn
@@ -53,7 +61,7 @@
                 flat
                 dense
                 round
-                @click="deleteProduct(product.prodId)"
+                @click="deleteProduct(product)"
                 icon="delete"
               />
               <q-btn
@@ -79,6 +87,18 @@
         <q-separator />
 
       </q-list>
+      <q-item>
+        <q-item-section class="col-10">
+
+        </q-item-section>
+        <q-item-section
+          side
+          top
+        >
+          <q-item-label class="text-weight-bold text-h6"> {{totalPrice}} tk</q-item-label>
+        </q-item-section>
+      </q-item>
+      <br />
       <q-btn
         @click="openDialog()"
         label="add product"
@@ -198,6 +218,9 @@ export default {
       this.$store.dispatch('createSale', data);
       console.log(data);
     },
+    deleteProduct(product) {
+      this.salesProductList.pop(product);
+    },
   },
   computed: {
     ...mapState({
@@ -206,6 +229,13 @@ export default {
       userList: state => state.administration.userList,
       employeeList: state => state.administration.employeeList,
     }),
+    totalPrice() {
+      let total = 0;
+      this.salesProductList.forEach((element) => {
+        total += element.prodQuantity * element.prodPrice;
+      });
+      return total;
+    },
   },
 };
 </script>
