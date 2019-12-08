@@ -77,6 +77,7 @@
             clickable
             v-ripple
             to="/report"
+            v-if="isAdmin"
           >
             <q-item-section avatar>
               <q-icon name="pie_chart" />
@@ -88,6 +89,7 @@
           <q-item
             clickable
             v-ripple
+            v-if="isAdmin"
             to="/administration"
           >
             <q-item-section avatar>
@@ -100,6 +102,7 @@
           <q-item
             clickable
             v-ripple
+            v-if="isAdmin"
             to="/users"
           >
             <q-item-section avatar>
@@ -120,6 +123,8 @@
 </template>
 
 <script>
+import { LocalStorage } from 'quasar';
+
 export default {
   name: 'ProjectLayout',
   data() {
@@ -128,10 +133,17 @@ export default {
       miniState: true,
     };
   },
+  computed: {
+    isAdmin() {
+      console.log('local storage is ', LocalStorage.getItem('isAuthenticated').data.data.type);
+      return LocalStorage.getItem('isAuthenticated').data.data.type === 'ADMIN';
+    },
+  },
   methods: {
     logout() {
       console.log('logoout clicked');
-      this.$router.push('/');
+      LocalStorage.clear();
+      this.$router.push('/auth');
     },
   },
 };

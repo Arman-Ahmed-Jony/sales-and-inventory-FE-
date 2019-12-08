@@ -14,7 +14,7 @@ export default [
         component: () => import('./pages/Administration'),
         name: 'administration',
         meta: {
-          noAuthRequired: true,
+          noAuthRequired: false,
         },
       },
       {
@@ -22,7 +22,7 @@ export default [
         component: () => import('./pages/Users'),
         name: 'users',
         meta: {
-          noAuthRequired: true,
+          noAuthRequired: false,
         },
       },
     ],

@@ -14,7 +14,7 @@ export default [
         component: () => import('./pages/Report'),
         name: 'report',
         meta: {
-          noAuthRequired: true,
+          noAuthRequired: false,
         },
       },
     ],

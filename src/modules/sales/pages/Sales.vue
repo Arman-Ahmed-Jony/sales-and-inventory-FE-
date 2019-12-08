@@ -215,7 +215,13 @@ export default {
         comment: this.comment,
         empId: this.employee,
       };
-      this.$store.dispatch('createSale', data);
+      this.$store.dispatch('createSale', data).then(() => {
+        this.salesProductList = [];
+        this.$q.notify({
+          message: 'Sales done',
+          color: 'primary',
+        });
+      });
       console.log(data);
     },
     deleteProduct(product) {

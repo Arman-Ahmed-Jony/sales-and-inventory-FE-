@@ -14,7 +14,7 @@ export default [
         component: () => import('./pages/Inventory'),
         name: 'inventory',
         meta: {
-          noAuthRequired: true,
+          noAuthRequired: false,
         },
       },
     ],

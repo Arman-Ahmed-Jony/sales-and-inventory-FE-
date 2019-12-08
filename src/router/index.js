@@ -30,12 +30,12 @@ export default function () {
     // when route requires auth and there's no current user, reidrect to '/login'
     if (!noAuthRequired && isAuthenticated === null) {
       next('/auth');
-    // when we go to login route and are already logged in, we can skip this page
-    // so we redirect to the homepage
+      // when we go to login route and are already logged in, we can skip this page
+      // so we redirect to the homepage
     } else if (to.path === '/auth' && isAuthenticated) {
       next('/');
-    // if none of the above matches, we have a normal navigation that should just go through
-    // so we call `next()`
+      // if none of the above matches, we have a normal navigation that should just go through
+      // so we call `next()`
     } else {
       next();
     }

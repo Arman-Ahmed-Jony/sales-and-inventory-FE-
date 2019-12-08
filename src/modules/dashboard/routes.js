@@ -14,7 +14,7 @@ export default [
         component: () => import('./pages/Dashboard'),
         name: 'dashboard',
         meta: {
-          noAuthRequired: true,
+          noAuthRequired: false,
         },
       },
     ],

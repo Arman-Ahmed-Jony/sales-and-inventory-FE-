@@ -8,7 +8,7 @@ export default {
   },
 
   list() {
-    return client.get(`${RESOURCE_NAME}`);
+    return client.get('/v1/sales');
   },
 
   update(payload) {

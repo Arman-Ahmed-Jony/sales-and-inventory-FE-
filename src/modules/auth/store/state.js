@@ -4,10 +4,7 @@ export default {
     accessToken: null,
   },
   oauthclients: [],
-  user: {
-    first_name: null,
-    last_name: null,
-  },
+  user: {},
   loadingAuth: false,
 
 };

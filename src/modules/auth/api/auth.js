@@ -13,8 +13,8 @@ export default {
   update(userId, data) {
     return client.put(`/users/${userId}`, data);
   },
-  login(params) {
-    return client.post('login', params);
+  signIn(params) {
+    return client.post('/v1/user/login', params);
   },
   getUserInfo() {
     return client.get('whoami');

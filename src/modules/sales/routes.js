@@ -14,7 +14,7 @@ export default [
         component: () => import('./pages/Sales'),
         name: 'sales',
         meta: {
-          noAuthRequired: true,
+          noAuthRequired: false,
         },
       },
     ],
