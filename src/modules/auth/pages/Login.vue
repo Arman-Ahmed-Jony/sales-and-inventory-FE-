@@ -87,6 +87,13 @@ export default {
         if (res.data.status !== 401) {
           console.log('ok route');
           this.$router.push({ path: '/dashboard' });
+        } else {
+          console.log('Invalid cridentials');
+          this.$q.notify({
+            message: 'You have entered invalid cridential',
+            color: 'red',
+          });
+          this.password = '';
         }
       });
     },

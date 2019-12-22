@@ -2,6 +2,7 @@
   <q-page>
     <div class="q-pa-md">
       <q-item-label header>Sales </q-item-label>
+
       <q-separator inset />
       <q-list
         bordered
@@ -195,6 +196,8 @@ export default {
     };
   },
   created() {
+    this.$store.dispatch('loadProductCategoryList');
+    this.$store.dispatch('loadProductList');
     console.log(this.productList);
   },
   methods: {
