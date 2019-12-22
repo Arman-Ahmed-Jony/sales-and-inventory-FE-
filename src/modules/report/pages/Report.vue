@@ -125,20 +125,7 @@ export default {
         startY: doc.autoTableEndPosY() + 80,
       };
 
-
-      console.log(doc.getFontList());
-      let records = this.SalesListTableData.length;
-      console.log(records);
-      let pageNumber = 0;
-      while (records > 0) {
-        pageNumber += 1;
-        doc.text(`page-${pageNumber}`, 500, 800);
-        records -= 18;
-      }
       doc.autoTable(res.columns, res.data, options);
-
-      // doc.text(`page-${i}`, 500, 700);
-      // doc.autoPrint();
       doc.save(`sals-report(${new Date()}).pdf`);
     },
   },
