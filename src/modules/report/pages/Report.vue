@@ -102,11 +102,14 @@ export default {
       const res = doc.autoTableHtmlToJson(this.$refs.salesTable);
       console.log(res);
       const header = (data) => {
-        doc.setFontSize(18);
+        doc.setFontSize(20);
         doc.setTextColor(40);
         doc.setFontStyle('bold');
-        // doc.addImage(headerImgData, 'JPEG', data.settings.margin.left, 20, 50, 50);
-        doc.text('Sales Report', data.settings.margin.left, 50);
+        doc.text('MICROTECH COMPUTER', data.settings.margin.left, 50);
+        doc.setFontSize(12);
+        doc.setTextColor(40);
+        doc.setFontStyle('bold');
+        doc.text('Sales Report', data.settings.margin.left, 75);
         doc.setFontSize(8);
         doc.setTextColor(40);
         doc.setFontStyle('normal');
@@ -117,7 +120,7 @@ export default {
         theme: 'grid',
         didDrawPage: header,
         margin: {
-          top: 80,
+          top: 90,
         },
         headStyles: { fillColor: [2, 69, 176] },
         columnStyles: {
