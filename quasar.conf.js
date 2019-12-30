@@ -71,6 +71,9 @@ module.exports = function (ctx) {
         'QAvatar',
         'QSeparator',
         'QScrollArea',
+        'QSpinner',
+        'QSpinnerGears',
+        'QSpinnerGrid',
       ],
 
       directives: [

@@ -14,10 +14,12 @@
   "dependencies": {
     "@quasar/extras": "^1.0.0",
     "axios": "^0.18.1",
+    "chart.js": "^2.9.3",
     "jspdf": "^1.5.3",
     "jspdf-autotable": "^3.2.11",
     "lint": "^0.7.0",
     "quasar": "^1.0.0",
+    "vue-chartjs": "^3.5.0",
     "vue-i18n": "^8.0.0"
   },
   "devDependencies": {
