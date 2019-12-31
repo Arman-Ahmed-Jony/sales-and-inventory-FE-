@@ -46,15 +46,6 @@
               @click="deleteEmployee(emplyee.id)"
               icon="delete"
             />
-            <q-btn
-              class="gt-xs"
-              size="12px"
-              color="green"
-              flat
-              dense
-              round
-              icon="done"
-            />
 
           </div>
         </q-item-section>

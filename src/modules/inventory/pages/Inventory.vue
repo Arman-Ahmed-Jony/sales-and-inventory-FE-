@@ -38,7 +38,8 @@
               class="q-mt-xs text-body2 text-weight-bold text-primary text-uppercase"
             >
               <span>price: {{product.prodPrice}}</span><br />
-              <span>Available: {{product.prodQuantity}}</span>
+              <span :style="product.prodQuantity<5?'color:red':'color:green'">
+                Available: {{product.prodQuantity}}</span>
 
             </q-item-label>
           </q-item-section>
@@ -66,6 +67,7 @@
                 dense
                 round
                 icon="edit"
+                @click="editProduct(product)"
               />
             </div>
           </q-item-section>
@@ -83,7 +85,7 @@
       <q-btn
         label="add a product"
         class="q-mr-md q-mt-lg"
-        @click="addProductDialog=true"
+        @click="showProductDialogbox()"
       />
     </div>
 
@@ -143,6 +145,71 @@
           <q-btn
             flat
             label="Add"
+            color="primary"
+            @click="addProduct()"
+          />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
+
+    <q-dialog
+      v-model="editProductDialog"
+      transition-show="slide-down"
+      transition-hide="slide-up"
+    >
+      <q-card style="width:800px">
+        <q-card-section class="row items-center">
+          <span class="q-ml-sm">Edit Product</span>
+        </q-card-section>
+        <q-card-section>
+          <q-input
+            v-model="productId"
+            label="SKU"
+            type="number"
+            readonly
+          />
+          <q-input
+            v-model="productName"
+            label="Name"
+          />
+          <q-input
+            v-model="productDescription"
+            label="Description"
+          />
+
+          <q-select
+            v-model="productCategoty"
+            :options="productCategoryList"
+            option-value="id"
+            option-label="categoryName"
+            map-options
+            emit-value
+            label="Category"
+            readonly
+          />
+
+          <q-input
+            v-model="productPrice"
+            label="Price"
+            type="number"
+          />
+          <q-input
+            v-model="productQuantity"
+            label="Quantity"
+            type="number"
+          />
+        </q-card-section>
+
+        <q-card-actions align="right">
+          <q-btn
+            flat
+            label="Cancle"
+            color="primary"
+            v-close-popup
+          />
+          <q-btn
+            flat
+            label="Edit"
             color="primary"
             @click="addProduct()"
           />
@@ -257,6 +324,7 @@ export default {
       addProductDialog: false,
       categoryDialog: false,
       categoryName: '',
+      editProductDialog: false,
     };
   },
   created() {
@@ -276,6 +344,10 @@ export default {
         : `${this.selected.length} record${
           this.selected.length > 1 ? 's' : ''
         } selected of ${this.data.length}`;
+    },
+    showProductDialogbox() {
+      this.addProductDialog = true;
+      this.refill();
     },
     showCategoryDialog() {
       this.categoryDialog = true;
@@ -298,6 +370,16 @@ export default {
         this.categoryName = '';
       });
     },
+    editProduct(product) {
+      console.log(product);
+      this.productId = product.prodId;
+      this.productDescription = product.prodDesc;
+      this.productPrice = product.prodPrice;
+      this.productName = product.prodName;
+      this.productCategoty = product.prodCategory;
+      this.productQuantity = product.prodQuantity;
+      this.editProductDialog = true;
+    },
     addProduct() {
       const payload = {
         prodCategory: this.productCategoty,
@@ -310,9 +392,19 @@ export default {
       console.log(payload);
       this.$store.dispatch('createProduct', payload).then((response) => {
         console.log('add product', response);
+        this.editProductDialog = false;
         this.$store.dispatch('loadProductCategoryList');
         this.$store.dispatch('loadProductList');
+        this.refill();
       });
+    },
+    refill() {
+      this.productCategoty = '';
+      this.productName = '';
+      this.productId = '';
+      this.productDescription = '';
+      this.productPrice = '';
+      this.productQuantity = '';
     },
     productCategory(id) {
       return this.productCategoryList.find(prodCategory => prodCategory.id === id).categoryName;

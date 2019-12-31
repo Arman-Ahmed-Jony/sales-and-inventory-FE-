@@ -60,6 +60,8 @@ export default {
     };
   },
   created() {
+    this.$store.dispatch('loadProductCategoryList');
+    this.$store.dispatch('loadProductList');
     this.$store.dispatch('loadSalesList').then(() => {
       this.loading = false;
       this.fillData();

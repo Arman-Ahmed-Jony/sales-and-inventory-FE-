@@ -4,6 +4,7 @@
       <q-item-label header>Sales </q-item-label>
 
       <q-separator inset />
+      <!-- {{salesProductList}} -->
       <q-list
         bordered
         class="rounded-borders full-width"
