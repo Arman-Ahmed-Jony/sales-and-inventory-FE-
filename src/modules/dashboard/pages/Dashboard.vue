@@ -1,5 +1,5 @@
 <template>
-  <q-page>
+  <q-page class="q-ma-sm">
     <div
       v-if="loading"
       class="absolute-full text-subtitle2 flex flex-center"
@@ -9,40 +9,36 @@
         size="6em"
       />
     </div>
-    <div
-      v-else
-      class="row"
-    >
-      <!-- <img alt="Quasar logo" src="~assets/quasar-logo-full.svg"> -->
-      <!-- <h3>Dashboard page is going to be worked today</h3> -->
-      <!-- {{SalesListTableData}} -->
-      <!-- sales vs total price chart -->
+    <div v-else>
+      <div>
 
-      <!-- <div
-        v-for="(sales, index) in SalesListTableData"
-        :key="index"
-      >
-        <span>{{sales}}</span>
-      </div> -->
-      <div class="salesChart col">
-        <span style="text-align: center">sales vs total price chart</span>
-        <bar-chart :chart-data="datacollection"></bar-chart>
+        <q-chip
+          v-for="(product, index) in productList"
+          :key="index"
+          size="18px"
+        >
+          <q-avatar
+            :color="product.prodQuantity<5
+              ?'red':'green'"
+            text-color="white"
+          >{{product.prodQuantity}}</q-avatar>
+          {{product.prodName}}
+        </q-chip>
       </div>
-      <!-- end -->
-      <!-- sales vs total price chart -->
-      <!-- <div
-        v-for="(sales, index) in SalesListTableData"
-        :key="index"
-      >
-        <span>{{sales}}</span>
-      </div> -->
-      <div class="salesChart col">
-        <line-chart :chart-data="datacollection"></line-chart>
-      </div>
-      <!-- end -->
+      <div class="charts-container row">
+        <div class="salesChart">
+          <span style="text-align: center">sales vs total price chart</span>
+          <bar-chart :chart-data="datacollection"></bar-chart>
+        </div>
 
+        <div class="salesChart">
+          <span style="text-align: center">sales vs total price chart</span>
+          <line-chart :chart-data="datacollection"></line-chart>
+        </div>
+        <!-- end -->
+
+      </div>
     </div>
-
   </q-page>
 </template>
 
@@ -72,6 +68,7 @@ export default {
   computed: {
     ...mapState({
       salesList: state => state.sales.salesList,
+      productList: state => state.inventory.productList,
     }),
     SalesListTableData() {
       const els = [];
@@ -118,12 +115,16 @@ export default {
 </script>
 <style scoped>
 .salesChart {
-  margin: 0 auto;
+  margin: 50px;
   width: 400px;
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
 .center {
   text-align: center;
   /* margin: 0 auto; */
+}
+.charts-container {
+  margin: 0 auto;
+  width: 90%;
 }
 </style>

@@ -25,7 +25,7 @@ export function signIn({ commit }, params) {
     if (response.data.status !== 401) {
       commit('SET_USER_PROFILE', response);
       LocalStorage.set('isAuthenticated', response);
-      console.log(response);
+      console.log('user is ', response.data.data.type);
     }
     return response;
   });

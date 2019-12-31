@@ -48,7 +48,7 @@
             side
           >
             <div class="text-grey-8 q-gutter-xs">
-              <q-btn
+              <!-- <q-btn
                 class="gt-xs"
                 size="12px"
                 color="red"
@@ -57,7 +57,7 @@
                 round
                 @click="deleteProduct(product.prodId)"
                 icon="delete"
-              />
+              /> -->
               <q-btn
                 class="gt-xs"
                 size="12px"
@@ -66,13 +66,6 @@
                 dense
                 round
                 icon="edit"
-              />
-              <q-btn
-                size="12px"
-                flat
-                dense
-                round
-                icon="more_vert"
               />
             </div>
           </q-item-section>
@@ -91,11 +84,6 @@
         label="add a product"
         class="q-mr-md q-mt-lg"
         @click="addProductDialog=true"
-      />
-      <q-btn
-        label="delete selected products"
-        class="q-mt-lg"
-        @click="confirm = true"
       />
     </div>
 

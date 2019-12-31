@@ -34,8 +34,15 @@ export default function () {
       // so we redirect to the homepage
     } else if (to.path === '/auth' && isAuthenticated) {
       next('/');
+
       // if none of the above matches, we have a normal navigation that should just go through
       // so we call `next()`
+    } else if (to.path === '/administration' && isAuthenticated.data.data.type !== 'ADMIN') {
+      next('/');
+    } else if (to.path === '/report' && isAuthenticated.data.data.type !== 'ADMIN') {
+      next('/');
+    } else if (to.path === '/users' && isAuthenticated.data.data.type !== 'ADMIN') {
+      next('/');
     } else {
       next();
     }

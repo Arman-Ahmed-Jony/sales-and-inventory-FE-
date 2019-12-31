@@ -110,7 +110,7 @@
         filled
         type="textarea"
       />
-      <q-select
+      <!-- <q-select
         v-model="employee"
         :options="employeeList"
         option-value="id"
@@ -118,7 +118,8 @@
         map-options
         emit-value
         label="Employee"
-      />
+      /> -->
+
       <q-btn
         label="Sale"
         @click="handleCreateSale"
@@ -191,7 +192,7 @@ export default {
         prodQuantity: '',
         prodPrice: '',
       },
-      employee: '',
+      employee: this.userId,
       comment: '',
     };
   },
@@ -216,7 +217,7 @@ export default {
       const data = {
         products: this.salesProductList,
         comment: this.comment,
-        empId: this.employee,
+        empId: this.userId,
       };
       this.$store.dispatch('createSale', data).then(() => {
         this.salesProductList = [];
@@ -237,7 +238,11 @@ export default {
       productList: state => state.inventory.productList,
       userList: state => state.administration.userList,
       employeeList: state => state.administration.employeeList,
+      userProfile: state => state.auth.user,
     }),
+    userId() {
+      return this.userProfile.data.data.id;
+    },
     totalPrice() {
       let total = 0;
       this.salesProductList.forEach((element) => {

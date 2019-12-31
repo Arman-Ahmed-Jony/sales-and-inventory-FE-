@@ -16,7 +16,7 @@
           filled
           bottom-slots
           v-model="userName"
-          label="User Email"
+          label="User Name"
         >
           <template v-slot:prepend>
             <q-icon name="supervised_user_circle" />

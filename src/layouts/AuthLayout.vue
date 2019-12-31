@@ -7,7 +7,7 @@
           Sales And Inventory App
         </q-toolbar-title>
 
-        <div>App v.0.1</div>
+        <div>App v.1.0.0</div>
       </q-toolbar>
     </q-header>
 
