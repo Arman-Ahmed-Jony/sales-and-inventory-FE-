@@ -106,6 +106,11 @@ export default {
             data: this.SalesListTableData,
           },
         ],
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          hoverBorderColor: 'red',
+        },
       };
     },
 
